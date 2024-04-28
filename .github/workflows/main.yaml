@@ -12,12 +12,17 @@ jobs:
         with: 
           repository: GTHell/staff-management-backend
           path: backend
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
+
       - name: Build and publish
-        run: dotnet publish -c Release -o publish
+        run: |
+          cd backend/StaffManagement.Service
+          dotnet publish -c Release -o ../../published
+
       - name: Start backend sever
         run: |
           cd backend/publish
