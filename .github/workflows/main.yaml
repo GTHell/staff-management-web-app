@@ -21,7 +21,7 @@ jobs:
       - name: Build and publish
         run: |
           cd backend/StaffManagement.Service
-          dotnet publish -c Release -o ../published
+          dotnet publish -c Release -o ../publish
 
       - name: Start backend sever
         run: |
