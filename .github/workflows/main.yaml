@@ -21,7 +21,11 @@ jobs:
       - name: Start backend server
         run: |
           cd backend/StaffManagement.Service
-          dotnet run --urls "http://localhost:8000" &
+          dotnet run --no-build --urls "http://localhost:8000" > backend.log 2>&1 &
+
+      - name: Wait for backend server to start
+        run: |
+          sleep 10
 
       # - name: Build and publish
       #   run: |
