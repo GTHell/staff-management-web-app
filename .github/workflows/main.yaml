@@ -42,6 +42,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with: 
+          repository: GTHell/staff-management-backend
+          path: backend
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      
+      # Sed the appsettings.json file to allow cors
+      - name: Set up AllowAnyOrigin
+        run: |
+          sed -i 's/{AllowAnyOrigin}/true/g' backend/StaffManagement.Service/appsettings.json
+      
+      - name: Build and publish
+        run: |
+          cd backend/StaffManagement.Service
+          dotnet publish -c Release -o ../publish
+
+      - name: Start backend sever
+        run: |
+          cd backend/publish
+          dotnet StaffManagement.dll --urls "http://localhost:8000" &
+      - name: Checkout
+        uses: actions/checkout@v2
         # install npm dependencies
       - name: Install Dependencies
         run: npm install
