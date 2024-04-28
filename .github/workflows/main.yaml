@@ -21,7 +21,7 @@ jobs:
       # Sed the appsettings.json file to allow cors
       - name: Set up AllowAnyOrigin
         run: |
-          sed -i 's/\{AllowAnyOrigin\}/true/g' backend/StaffManagement.Service/appsettings.json
+          sed -i 's/{AllowAnyOrigin}/true/g' backend/StaffManagement.Service/appsettings.json
       
       - name: Start backend server
         run: |
