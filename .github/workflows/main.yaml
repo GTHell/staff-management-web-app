@@ -23,11 +23,6 @@ jobs:
         run: |
           sed -i 's/{AllowAnyOrigin}/true/g' backend/StaffManagement.Service/appsettings.json
       
-      - name: Start backend server
-        run: |
-          cd backend/StaffManagement.Service
-          dotnet run --urls "http://localhost:8000" &
-
       - name: Build and publish
         run: |
           cd backend/StaffManagement.Service
