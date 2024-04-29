@@ -7,53 +7,11 @@ jobs:
   #   runs-on: ubuntu-22.04
 
   #   steps:
-<<<<<<< HEAD
   #     - name: Checkout
   #       uses: actions/checkout@v2
   #       with: 
   #         repository: GTHell/staff-management-backend
   #         path: backend
-  #         token: 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
-=======
-      # - name: Checkout
-      #   uses: actions/checkout@v2
-      #   with: 
-      #     repository: GTHell/staff-management-backend
-      #     path: backend
-
-      # - name: Set up .NET Core
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: 8.0.x
-      
-      # # Sed the appsettings.json file to allow cors
-      # - name: Set up AllowAnyOrigin
-      #   run: |
-      #     sed -i 's/{AllowAnyOrigin}/true/g' backend/StaffManagement.Service/appsettings.json
-      
-      # - name: Build and publish
-      #   run: |
-      #     cd backend/StaffManagement.Service
-      #     dotnet publish -c Release -o ../publish
-
-      # - name: Start backend sever
-      #   run: |
-      #     cd backend/publish
-      #     dotnet StaffManagement.dll --urls "http://localhost:8000" &
-        
-  cypress-run:
-    runs-on: ubuntu-22.04
-    # needs: backend-setup
-    # container:
-    #   image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
-    #   options: --user 1001
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with: 
-          repository: GTHell/staff-management-backend
-          path: backend
->>>>>>> c1737f35b6a60995f8fa1e39d374317797ea4603
 
   #     - name: Set up .NET Core
   #       uses: actions/setup-dotnet@v4
@@ -70,7 +28,6 @@ jobs:
   #         cd backend/StaffManagement.Service
   #         dotnet publish -c Release -o ../publish
 
-<<<<<<< HEAD
   #     - name: Start backend sever
   #       run: |
   #         cd backend/publish
@@ -82,12 +39,6 @@ jobs:
     container:
       image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
     steps:
-=======
-      - name: Start backend sever
-        run: |
-          cd backend/publish
-          dotnet StaffManagement.dll --urls "http://localhost:8000" &
->>>>>>> c1737f35b6a60995f8fa1e39d374317797ea4603
       - name: Checkout
         uses: actions/checkout@v2
 
