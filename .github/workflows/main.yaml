@@ -3,59 +3,60 @@ name: Cypress Test
 on: [push]
 
 jobs:
-  backend-setup:
-    runs-on: ubuntu-22.04
+  # backend-setup:
+  #   runs-on: ubuntu-22.04
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with: 
-          repository: GTHell/staff-management-backend
-          path: backend
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #       with: 
+  #         repository: GTHell/staff-management-backend
+  #         path: backend
+  #         token: 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
 
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
+  #     - name: Set up .NET Core
+  #       uses: actions/setup-dotnet@v4
+  #       with:
+  #         dotnet-version: 8.0.x
       
-      # Sed the appsettings.json file to allow cors
-      - name: Set up AllowAnyOrigin
-        run: |
-          sed -i 's/{AllowAnyOrigin}/true/g' backend/StaffManagement.Service/appsettings.json
+  #     # Sed the appsettings.json file to allow cors
+  #     - name: Set up AllowAnyOrigin
+  #       run: |
+  #         sed -i 's/{AllowAnyOrigin}/true/g' backend/StaffManagement.Service/appsettings.json
       
-      - name: Build and publish
-        run: |
-          cd backend/StaffManagement.Service
-          dotnet publish -c Release -o ../publish
+  #     - name: Build and publish
+  #       run: |
+  #         cd backend/StaffManagement.Service
+  #         dotnet publish -c Release -o ../publish
 
-      - name: Start backend sever
-        run: |
-          cd backend/publish
-          dotnet StaffManagement.dll --urls "http://localhost:8000" &
+  #     - name: Start backend sever
+  #       run: |
+  #         cd backend/publish
+  #         dotnet StaffManagement.dll --urls "http://localhost:8000" &
         
   cypress-run:
     runs-on: ubuntu-22.04
-    needs: backend-setup
+    # needs: backend-setup
     container:
       image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
-      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
         # install npm dependencies
       - name: Install Dependencies
         run: npm install
+
         # Cache the installed dependencies
       - name: Cache node modules
         uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
-           
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
           build: npm run build
           start: npm run test:e2e
           browser: chrome
-
